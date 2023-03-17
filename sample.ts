@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 
-import FilterAndSort, { SortOption } from '../../modules/FilterAndSort';
 import ResourceBrowse from '../../data/ResourceBrowse';
 import ResourceBrowseFilterList from '../../data/ResourceBrowseFilterList';
+import FilterAndSort, { SortOption } from '../../modules/FilterAndSort';
 import TextStyle from '../../elements/TextStyle';
 import { notEmpty } from '../../../utils';
 
