@@ -40,18 +40,16 @@ const sortOptions: SortOption[] = [
 const AllResourcesPage = ({ viewer }: Props) => {
   /** resources can be filtered by topic
    * AND they can also be sorted by skill or risk level */
-  const [activeTopicFilterId, setActiveTopicFilterId] =
-    useState('all-resources');
-  const [activeTopicFilterDisplayName, setActiveTopicFilterDisplayName] =
+  const [activeFilterId, setActiveFilterId] = useState('all-resources');
+  const [activeFilterDisplayName, setActiveFilterDisplayName] =
     useState('All Resources');
   const summary = viewer?.realmContent?.nodeSpeaking?.summary?.text || '';
-  const [activeTopicFilterSummary, setActiveTopicFilterSummary] =
-    useState(summary);
+  const [activeFilterSummary, setActiveFilterSummary] = useState(summary);
 
   // index of the sort option
   const [activeSortId, setActiveSortId] = useState(0);
 
-  /** the lists contain the order that we want to sort the resources by (editable in falcon)
+  /** the lists contain the order that we want to sort the resources by (editable in CMS)
    * e.g.,
    * skillLevel = ['beginner', 'intermediate', 'advanced']
    * riskLevel = ['moderate', 'moderate-high', 'high']
@@ -86,21 +84,21 @@ const AllResourcesPage = ({ viewer }: Props) => {
         <ResourceBrowseFilterList
           nodes={resources}
           itemsType="resource"
-          setActiveTopicFilterId={setActiveTopicFilterId}
-          activeTopicFilterId={activeTopicFilterId}
-          setActiveTopicFilterDisplayName={setActiveTopicFilterDisplayName}
-          setActiveTopicFilterSummary={setActiveTopicFilterSummary}
-          activeTopicFilterSummary={activeTopicFilterSummary}
+          setActiveFilterId={setActiveFilterId}
+          activeFilterId={activeFilterId}
+          setActiveFilterDisplayName={setActiveFilterDisplayName}
+          setActiveFilterSummary={setActiveFilterSummary}
+          activeFilterSummary={activeFilterSummary}
           setActiveSortId={setActiveSortId}
           activeSortId={activeSortId}
         />
       </div>
       <div className={styles.resources}>
         <TextStyle Component="div" className={styles.title}>
-          {activeTopicFilterDisplayName}
+          {activeFilterDisplayName}
         </TextStyle>
         <TextStyle Component="div" className={styles.summary}>
-          {activeTopicFilterSummary}
+          {activeFilterSummary}
         </TextStyle>
         <div className={styles.sortByWrapper}>
           <div className={styles.sortByContainer}>
@@ -116,7 +114,7 @@ const AllResourcesPage = ({ viewer }: Props) => {
             </FilterAndSort>
           </div>
         </div>
-        {activeTopicFilterId === 'all-resources' ? (
+        {activeFilterId === 'all-resources' ? (
           <ResourceBrowse
             activeSortOptionId={sortOptions[activeSortId]?.sectionSpeakingId}
             sortArray={sortArray}
@@ -124,7 +122,7 @@ const AllResourcesPage = ({ viewer }: Props) => {
           />
         ) : (
           <ResourceBrowse
-            resourceFilterId={activeTopicFilterId}
+            resourceFilterId={activeFilterId}
             activeSortOptionId={sortOptions[activeSortId]?.sectionSpeakingId}
             sortArray={sortArray}
           />
